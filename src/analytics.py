@@ -369,12 +369,14 @@ class AdvancedAdmissionAnalytics:
         
         # Analyze college types
         college_type_seats = self.df.groupby('college_type')['total_seats'].sum()
-        if 'Women\'s College' in college_type_seats:
-            recommendations.append(f"👩‍🎓 Women's colleges offer {college_type_seats['Women\'s College']:,} seats across various programs")
+        womens_college_key = "Women's College"
+        if womens_college_key in college_type_seats:
+            recommendations.append(f"👩‍🎓 Women's colleges offer {college_type_seats[womens_college_key]:,} seats across various programs")
         
         # Evening colleges
-        if 'Evening College' in college_type_seats:
-            recommendations.append(f"🌙 Evening colleges provide {college_type_seats['Evening College']:,} seats for working students")
+        evening_college_key = "Evening College"
+        if evening_college_key in college_type_seats:
+            recommendations.append(f"🌙 Evening colleges provide {college_type_seats[evening_college_key]:,} seats for working students")
         
         # Program level analysis
         level_avg = self.df.groupby('program_level')['total_seats'].mean()
