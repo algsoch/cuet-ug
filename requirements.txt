@@ -14,9 +14,10 @@ numpy==1.25.2
 openpyxl==3.1.2
 xlsxwriter==3.1.9
 
-# PDF processing (Render-optimized)
+# PDF processing (Cloud-optimized)
 pdfplumber==0.10.3
 PyPDF2==3.0.1
+pypdfium2==4.30.0
 
 # HTTP client and server utilities
 httpx==0.25.2
@@ -31,8 +32,7 @@ python-dotenv==1.0.0
 pydantic==2.5.2
 
 # File handling and utilities
-python-magic-bin==0.4.14; sys_platform == "win32"
-python-magic==0.4.27; sys_platform != "win32"
+python-magic==0.4.27
 
 # Performance and caching
 cachetools==5.3.2

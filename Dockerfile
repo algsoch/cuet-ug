@@ -1,4 +1,4 @@
-# Use Python 3.11 slim image for smaller size
+# Use Python 3.11 slim image for smaller size and Render compatibility
 FROM python:3.11-slim
 
 # Set working directory
@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/app \
     PORT=8000
 
-# Install system dependencies
+# Install system dependencies (minimal for cloud deployment)
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \

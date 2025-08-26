@@ -4,7 +4,6 @@ Handles extraction of tabular data from PDF files using multiple extraction meth
 """
 
 import pandas as pd
-from tabula.io import read_pdf
 import pdfplumber
 import logging
 import os
@@ -13,9 +12,20 @@ import requests
 from io import BytesIO
 from .config import PDF_EXTRACTION_SETTINGS, EXPECTED_COLUMNS
 
+# Try to import tabula, but handle gracefully if not available
+try:
+    from tabula.io import read_pdf
+    TABULA_AVAILABLE = True
+except ImportError:
+    TABULA_AVAILABLE = False
+    read_pdf = None
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+if not TABULA_AVAILABLE:
+    logger.warning("Tabula not available. PDF extraction will use pdfplumber only.")
 
 
 class PDFExtractor:
@@ -25,11 +35,16 @@ class PDFExtractor:
     """
     
     def __init__(self):
+        # Only include tabula methods if tabula is available
         self.extraction_methods = [
-            self._extract_with_tabula,
             self._extract_with_pdfplumber,
-            self._extract_with_tabula_lattice
         ]
+        
+        if TABULA_AVAILABLE:
+            self.extraction_methods.extend([
+                self._extract_with_tabula,
+                self._extract_with_tabula_lattice
+            ])
     
     def extract_pdf(self, pdf_source: str) -> pd.DataFrame:
         """
@@ -101,6 +116,10 @@ class PDFExtractor:
     
     def _extract_with_tabula(self, pdf_path: str) -> Optional[pd.DataFrame]:
         """Extract using tabula-py with stream detection"""
+        if not TABULA_AVAILABLE or read_pdf is None:
+            logger.info("Tabula not available, skipping tabula extraction method")
+            return None
+            
         try:
             # Try with stream detection first
             dfs = read_pdf(
@@ -121,6 +140,10 @@ class PDFExtractor:
     
     def _extract_with_tabula_lattice(self, pdf_path: str) -> Optional[pd.DataFrame]:
         """Extract using tabula-py with lattice detection"""
+        if not TABULA_AVAILABLE or read_pdf is None:
+            logger.info("Tabula not available, skipping tabula lattice method")
+            return None
+            
         try:
             dfs = read_pdf(
                 pdf_path,
