@@ -14,10 +14,11 @@ numpy==1.25.2
 openpyxl==3.1.2
 xlsxwriter==3.1.9
 
-# PDF processing (Cloud-optimized)
+# PDF processing (Cloud-optimized - no Java dependencies)
 pdfplumber==0.10.3
 PyPDF2==3.0.1
 pypdfium2==4.30.0
+pdfminer.six==20221105
 
 # HTTP client and server utilities
 httpx==0.25.2
