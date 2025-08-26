@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: cuet-admission-analyzer
+    env: python
+    region: oregon # Options: oregon, frankfurt, singapore
+    plan: free # Options: free, starter, standard, pro, pro_max
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.4
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+      - key: ENVIRONMENT
+        value: production
+      - key: PORT
+        value: 8000
+    healthCheckPath: /api/health
+    autoDeploy: true # Enable auto-deployment on git push
+    
+# Optional: Database service (if you want to add database later)
+# databases:
+#   - name: cuet-analyzer-db
+#     databaseName: cuet_analyzer
+#     user: cuet_user
+#     region: oregon
+#     plan: free

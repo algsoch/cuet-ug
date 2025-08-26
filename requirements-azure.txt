@@ -1,0 +1,25 @@
+# Azure-optimized requirements for CUET UG Admission Analyzer
+# Core FastAPI dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+jinja2==3.1.2
+aiofiles==23.2.0
+
+# Data processing
+pandas==2.1.4
+numpy==1.24.4
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+
+# PDF processing (lightweight versions for Azure)
+pdfplumber==0.10.3
+PyPDF2==3.0.1
+
+# Web framework essentials
+requests==2.31.0
+pydantic==2.5.2
+python-dotenv==1.0.0
+
+# Utilities
+tqdm==4.66.1

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+</head>
+<body>
+    <h1>API Test</h1>
+    <div id="result">Loading...</div>
+    <script>
+        async function test() {
+            try {
+                const response = await fetch('/api/chart-data');
+                const data = await response.json();
+                document.getElementById('result').innerHTML = `
+                    <h2>Chart Data Keys:</h2>
+                    <p>${Object.keys(data).join(', ')}</p>
+                    <h2>Summary Cards:</h2>
+                    <pre>${JSON.stringify(data.summary_cards, null, 2)}</pre>
+                `;
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+            }
+        }
+        test();
+    </script>
+</body>
+</html>

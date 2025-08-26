@@ -1,0 +1,7 @@
+# Azure Web App Configuration
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[tool.azure]
+startup_file = "app.py"
+python_version = "3.11"

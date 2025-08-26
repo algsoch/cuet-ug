@@ -1,0 +1,43 @@
+# CUET UG Admission Analyzer - Render & Docker Optimized
+# Production Dependencies for Cloud Deployment
+
+# Core FastAPI and web framework dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+jinja2==3.1.2
+aiofiles==23.2.1
+
+# Data processing and analysis
+pandas==2.1.4
+numpy==1.25.2
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+
+# PDF processing (Render-optimized)
+pdfplumber==0.10.3
+PyPDF2==3.0.1
+
+# HTTP client and server utilities
+httpx==0.25.2
+requests==2.31.0
+python-dateutil==2.8.2
+
+# CORS and middleware
+starlette==0.27.0
+
+# Environment and configuration
+python-dotenv==1.0.0
+pydantic==2.5.2
+
+# File handling and utilities
+python-magic-bin==0.4.14; sys_platform == "win32"
+python-magic==0.4.27; sys_platform != "win32"
+
+# Performance and caching
+cachetools==5.3.2
+psutil==5.9.6
+
+# Development and logging
+rich==13.7.0
+structlog==23.2.0
